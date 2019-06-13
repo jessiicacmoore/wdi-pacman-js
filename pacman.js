@@ -1,6 +1,7 @@
 // Setup initial game stats
 let score = 0;
 let lives = 2;
+let powerPellet = 4;
 
 
 // Define your ghosts here
@@ -59,6 +60,7 @@ function displayStats() {
 function displayMenu() {
   console.log('\n\nSelect Option:\n');  // each \n creates a new line
   console.log('(d) Eat Dot');
+  console.log('(p) Eat Power Pellet');
   console.log('(1) Eat Inky');
   console.log('(2) Eat Blinky');
   console.log('(3) Eat Pinky');
@@ -78,10 +80,18 @@ function eatDot() {
   score += 10;
 }
 
+function isGameOver() {
+  if (lives == 0) {
+    process.exit();
+  }
+}
+
 function eatGhost(ghost) {
   if (ghost.edible == false) {
+    console.log(`\nChomp!\n${ghost.name} has killed Pac Man`);
     lives --;
   }
+  isGameOver();
 }
 
 
