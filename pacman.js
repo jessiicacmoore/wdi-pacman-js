@@ -80,6 +80,12 @@ function eatDot() {
   score += 10;
 }
 
+function eatPowerPellet() {
+  console.log('\nChomp!');
+  score += 50;
+  powerPellet --;
+}
+
 function isGameOver() {
   if (lives == 0) {
     process.exit();
@@ -104,6 +110,13 @@ function processInput(key) {
       break;
     case 'd':
       eatDot();
+      break;
+    case 'p':
+      if (powerPellet == 0) {
+        console.log('\nNo Power-Pellets left!');
+      } else {
+        eatPowerPellet();
+      }
       break;
     case '1':
       eatGhost(ghosts[0]);
