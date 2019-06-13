@@ -10,7 +10,7 @@ const inky = {
   name: 'Inky',
   colour: 'Red',
   character: 'Shadow',
-  edible: false
+  edible: true
 };
 
 const blinky = {
@@ -18,7 +18,7 @@ const blinky = {
   name: 'Blinky',
   colour: 'Cyan',
   character: 'Speedy',
-  edible: false
+  edible: true
 };
 
 const pinky = {
@@ -26,7 +26,7 @@ const pinky = {
   name: 'Pinky',
   colour: 'Pink',
   character: 'Bashful',
-  edible: false
+  edible: true
 };
 
 const clyde = {
@@ -34,10 +34,18 @@ const clyde = {
   name: 'Clyde',
   colour: 'Orange',
   character: 'Pokey',
-  edible: false
+  edible: true
 };
 
 ghosts = [inky, blinky, pinky, clyde]
+
+function is_edible(ghost) {
+  if (ghost.edible) {
+    return 'edible'
+  } else {
+    return 'inedible'
+  }
+}
 
 // Draw the screen functionality
 function drawScreen() {
@@ -59,12 +67,12 @@ function displayStats() {
 
 function displayMenu() {
   console.log('\n\nSelect Option:\n');  // each \n creates a new line
-  console.log('(d) Eat Dot');
+  console.log('\(d) Eat Dot');
   console.log('(p) Eat Power Pellet');
-  console.log('(1) Eat Inky');
-  console.log('(2) Eat Blinky');
-  console.log('(3) Eat Pinky');
-  console.log('(4) Eat Clyde');
+  console.log(`(1) Eat Inky (${is_edible(ghosts[0])})`);
+  console.log(`(2) Eat Blinky (${is_edible(ghosts[1])})`);
+  console.log(`(3) Eat Pinky (${is_edible(ghosts[2])})`);
+  console.log(`(4) Eat Clyde (${is_edible(ghosts[3])})`);
   console.log('(q) Quit');
 }
 
@@ -93,7 +101,12 @@ function isGameOver() {
 }
 
 function eatGhost(ghost) {
-  if (ghost.edible == false) {
+  
+  if (ghost.edible) {
+    console.log(`\nChomp!\n${ghost.name} is ${ghost.character}`);
+    score += 200;
+    ghost.edible = false;
+  } else {
     console.log(`\nChomp!\n${ghost.name} has killed Pac Man`);
     lives --;
   }
