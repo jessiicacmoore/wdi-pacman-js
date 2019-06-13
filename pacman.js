@@ -54,7 +54,7 @@ function clearScreen() {
 }
 
 function displayStats() {
-  console.log(`Score: ${score}     Lives: ${lives}`);
+  console.log(`Score: ${score}     Lives: ${lives}     Power Pellets: ${powerPellet}`);
 }
 
 function displayMenu() {
